@@ -2,7 +2,8 @@
 <html>
 <head>
     <title>ajax测试</title>
-    <script type="text/javascript"  src="./ajax.js"></script>
+    <script type="text/javascript"  src="<%=request.getContextPath()%>/resource/js/ajax.js"></script>
+    <script type="text/javascript" src="<%=request.getContextPath()%>/resource/js/jquery3.3.1/jquery.min.js"></script>
 </head>
 <body>
 <h1>XMLHttpRequest level 1</h1>
