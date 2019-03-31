@@ -31,6 +31,7 @@ public class Xhr2postServlet extends HttpServlet {
 
         //默认转换成了iso-8859-1的编码格式；和前端设置一处就可以了
         resp.setContentType("application/json;charset=UTF-8");
+        JSONObject data = new JSONObject();
         DiskFileItemFactory factory = new DiskFileItemFactory();
         ServletFileUpload upload = new ServletFileUpload(factory);
         InputStream inputStream = null;
@@ -41,6 +42,12 @@ public class Xhr2postServlet extends HttpServlet {
                 if (item.isFormField()) {
                     String fieldName = item.getFieldName();
                     String value = item.getString("UTF-8");
+                    if("name".equals(fieldName)){
+                        data.put("名字：", value);
+                    }
+                    if("age".equals(fieldName)){
+                        data.put("年龄：", value);
+                    }
                 } else {
                     //文件名称
                     String fileName = item.getName();
@@ -49,13 +56,10 @@ public class Xhr2postServlet extends HttpServlet {
                 }
             }
         } catch (FileUploadException e) {
-            e.printStackTrace();
+            data.put("失败原因：", e.getMessage());
         } finally {
             IOUtils.closeQuietly(inputStream);
         }
-        JSONObject data = new JSONObject();
-        data.put("success", true);
-        data.put("info", "成功了");
         resp.getWriter().print(data);
     }
 }

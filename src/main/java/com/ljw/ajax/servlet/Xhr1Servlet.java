@@ -23,6 +23,6 @@ public class Xhr1Servlet extends HttpServlet {
         resp.setContentType("text/html;charset=UTF-8");
         String name = req.getParameter("name");
         String age = req.getParameter("age");
-        resp.getWriter().print("<span>和前端设置一处就可以了</span>");
+        resp.getWriter().print("名字：" + name + "年龄：" + age);
     }
 }
